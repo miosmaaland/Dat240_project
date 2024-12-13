@@ -1,0 +1,27 @@
+@page
+@using SmaHauJenHoaVij.Pages.AdminPages
+@model AdminLoginModel
+@{
+    ViewData["Title"] = "Admin Login";
+}
+
+<h2>Admin Login</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label for="Email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="Email" name="Email" required oninput="this.value = this.value.toLowerCase();" value="@Model.Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label for="Password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="Password" name="Password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+
+@if (Model.ErrorMessage != null)
+{
+    <div class="alert alert-danger mt-3">@Model.ErrorMessage</div>
+}

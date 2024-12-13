@@ -1,0 +1,24 @@
+@page
+@model SmaHauJenHoaVij.Pages.AdminPages.ProductManagement.CreateModel
+
+@{
+    ViewData["Title"] = "Create Food Item";
+}
+
+<h2>Create Food Item</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label for="Name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" required />
+    </div>
+    <div class="mb-3">
+        <label for="Description" class="form-label">Description</label>
+        <textarea class="form-control" id="Description" name="Description" required>@Model.Description</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="Price" class="form-label">Price</label>
+        <input type="number" class="form-control" id="Price" name="Price" value="@Model.Price" step="0.01" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>

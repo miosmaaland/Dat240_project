@@ -1,0 +1,58 @@
+@page 
+@model SmaHauJenHoaVij.Pages.CustomerPages.Orders.MyOrder.IndexModel
+@{
+    ViewData["Title"] = "My Active Orders";
+}
+
+<h2>My Active Orders</h2>
+
+@if (Model.Orders.Count == 0)
+{
+    <p>You have no active orders.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Status</th>
+                <th>Delivery Location</th>
+                <th>Total Price</th>
+                <th>Order Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.Orders)
+            {
+                <tr>
+                    <td>@order.OrderId</td>
+                    <td>@order.Status</td>
+                    <td>@order.Location</td>
+                    <td>@order.TotalPrice</td>
+                    <td>@order.OrderDate.ToString("g")</td>
+                    <td>
+                        @if (order.Status == "Placed" || order.Status == "Accepted")
+                        {
+                            <form method="post" asp-page-handler="CancelOrder" asp-route-orderId="@order.OrderId" onsubmit="return confirmCancelOrder('@order.Status')">
+                                <button type="submit" class="btn btn-danger btn-sm">Cancel Order</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@section Scripts {
+    <script>
+        function confirmCancelOrder(status) {
+            if (status === 'Accepted') {
+                return confirm('Are you sure you want to cancel this order? You will still be charged the delivery fee.');
+            }
+            return confirm('Are you sure you want to cancel this order?');
+        }
+    </script>
+}

@@ -1,0 +1,39 @@
+@page
+@model SmaHauJenHoaVij.Pages.AdminPages.Orders.OrdersModel
+
+@{
+    ViewData["Title"] = "Orders Management";
+}
+
+<h2>Orders Management</h2>
+
+@if (Model.Orders.Count == 0)
+{
+    <p>No orders available.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer Name</th>
+                <th>Status</th>
+                <th>Total Price</th>
+                <th>Order Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.Orders)
+            {
+                <tr>
+                    <td>@order.OrderId</td>
+                    <td>@order.CustomerName</td>
+                    <td>@order.Status</td>
+                    <td>@order.TotalPrice</td>
+                    <td>@order.OrderDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

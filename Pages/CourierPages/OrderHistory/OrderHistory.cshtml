@@ -1,0 +1,31 @@
+@page
+@model SmaHauJenHoaVij.Pages.CourierPages.OrderHistory.OrderHistoryModel
+
+<h2>Order History</h2>
+
+@if (Model.Orders.Count == 0)
+{
+    <p>You have no order history.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Status</th>
+                <th>Reimbursement</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.Orders)
+            {
+                <tr>
+                    <td>@order.OrderId</td>
+                    <td>@order.Status</td>
+                    <td>@order.ReimbursementAmount:C</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

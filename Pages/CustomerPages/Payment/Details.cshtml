@@ -1,0 +1,67 @@
+@page "{id:guid}"
+@model SmaHauJenHoaVij.Pages.CustomerPages.Payment.DetailsModel
+@{
+    ViewData["Title"] = "Invoice Details";
+}
+
+<h1>Invoice Details</h1>
+
+@if (Model.Invoice == null)
+{
+    <p>Invoice not found.</p>
+}
+else
+{
+    <h3>Invoice Information</h3>
+    <p><strong>Invoice ID:</strong> @Model.Invoice.InvoiceId</p>
+    <p><strong>Order ID:</strong> @Model.Invoice.OrderId</p>
+    <p><strong>Delivery Fee:</strong> @Model.DeliveryFee</p>
+    <p><strong>Total Amount:</strong> @Model.Invoice.Amount</p>
+    <p><strong>Status:</strong> @Model.Invoice.Status</p>
+
+    <h3>Order Information</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.OrderLines == null || !Model.OrderLines.Any())
+            {
+                <tr>
+                    <td colspan="4">No order lines available.</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var line in Model.OrderLines)
+                {
+                    <tr>
+                        <td>@line.FoodItemName</td>
+                        <td>@line.Amount</td>
+                        <td>@line.Price</td>
+                        <td>@(line.Amount * line.Price):C</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    @if (Model.Invoice.Status == "Sent")
+    {
+        <form action="/create-checkout-session" method="POST">
+            <input type="hidden" name="invoiceId" value="@Model.Invoice.InvoiceId" />
+
+            <div class="form-group">
+                <label for="tipAmount">Add a Tip (optional):</label>
+                <input type="number" step="0.01" class="form-control" name="tipAmount" id="tipAmount" min="0" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Pay with Stripe</button>
+        </form>
+    }
+}

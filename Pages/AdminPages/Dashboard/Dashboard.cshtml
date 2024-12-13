@@ -1,0 +1,63 @@
+@page "/AdminPages/Dashboard/Index"
+@model SmaHauJenHoaVij.Pages.AdminPages.Dashboard.IndexModel
+@{
+    ViewData["Title"] = "Order Statistics";
+}
+
+<h1>Order Statistics</h1>
+
+<h2>Total Orders</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Stage</th>
+            <th>Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Open</td>
+            <td>@Model.Stats.TotalStats.Open</td>
+        </tr>
+        <tr>
+            <td>Being Delivered</td>
+            <td>@Model.Stats.TotalStats.BeingDelivered</td>
+        </tr>
+        <tr>
+            <td>Delivered</td>
+            <td>@Model.Stats.TotalStats.Delivered</td>
+        </tr>
+        <tr>
+            <td>Total</td>
+            <td>@Model.Stats.TotalStats.Total</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Month-to-Date Orders</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Stage</th>
+            <th>Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Open</td>
+            <td>@Model.Stats.MonthToDateStats.Open</td>
+        </tr>
+        <tr>
+            <td>Being Delivered</td>
+            <td>@Model.Stats.MonthToDateStats.BeingDelivered</td>
+        </tr>
+        <tr>
+            <td>Delivered</td>
+            <td>@Model.Stats.MonthToDateStats.Delivered</td>
+        </tr>
+        <tr>
+            <td>Total</td>
+            <td>@Model.Stats.MonthToDateStats.Total</td>
+        </tr>
+    </tbody>
+</table>

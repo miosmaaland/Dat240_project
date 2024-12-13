@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5268:5268"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ./Infrastructure/Data/shop.db:/app/Data/shop.db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

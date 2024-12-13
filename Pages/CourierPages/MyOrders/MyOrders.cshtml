@@ -1,0 +1,58 @@
+@page
+@model SmaHauJenHoaVij.Pages.CourierPages.MyOrdersModel
+@{
+    ViewData["Title"] = "My Active Orders";
+}
+
+<h2>My Active Orders</h2>
+
+@if (Model.Orders.Count == 0)
+{
+    <p>You have no active orders.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Status</th>
+                <th>Reimbursement</th>
+                <th>Customer Name</th>
+                <th>Location</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.Orders)
+            {
+                if (order.Status == "Accepted" || order.Status == "Picked_Up")
+                {
+                    <tr>
+                        <td>@order.OrderId</td>
+                        <td>@order.Status</td>
+                        <td>@order.ReimbursementAmount</td>
+                        <td>@order.CustomerName</td>
+                        <td>@order.Location</td>
+                        <td>
+                            @if (order.Status == "Accepted")
+                            {
+                                <form method="post" asp-page-handler="MarkAsPickedUp">
+                                    <input type="hidden" name="OfferId" value="@order.OfferId" />
+                                    <button type="submit" class="btn btn-warning btn-sm">Mark as Picked Up</button>
+                                </form>
+                            }
+                            else if (order.Status == "Picked_Up")
+                            {
+                                <form method="post" asp-page-handler="MarkAsDelivered">
+                                    <input type="hidden" name="OfferId" value="@order.OfferId" />
+                                    <button type="submit" class="btn btn-success btn-sm">Mark as Delivered</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}

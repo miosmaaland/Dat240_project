@@ -1,0 +1,39 @@
+@page
+@model SmaHauJenHoaVij.Pages.CustomerPages.Shopping.BrowseItemsModel
+
+@{
+    ViewData["Title"] = "Browse Food Items";
+}
+
+<h2>Browse Food Items</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Picture</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.FoodItems)
+        {
+            <tr>
+                <td><img src="@item.Picture.Path" alt="@item.Name" style="max-width: 100px;" /></td>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>@item.Price</td>
+                <td>
+                    <form method="post" asp-page-handler="AddToCart">
+                        <input type="hidden" name="ItemId" value="@item.Id" />
+                        <input type="hidden" name="ItemName" value="@item.Name" />
+                        <input type="hidden" name="ItemPrice" value="@item.Price" />
+                        <button type="submit" class="btn btn-primary">Add to Cart</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

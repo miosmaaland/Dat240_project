@@ -1,0 +1,19 @@
+@page
+@using SmaHauJenHoaVij.Pages.CustomerPages
+@model ApplyToCourierModel
+@{
+    ViewData["Title"] = "Apply to Become a Courier";
+}
+
+<h2>Apply to Become a Courier</h2>
+
+@if (Model.IsApplying)
+{
+    <p>Your application to become a courier is pending approval by an admin.</p>
+}
+else
+{
+    <form method="post">
+        <button type="submit" class="btn btn-primary">Apply to Become a Courier</button>
+    </form>
+}

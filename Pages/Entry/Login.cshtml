@@ -1,0 +1,42 @@
+@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Login";
+    // Get the return URL from ViewData and encode it
+    var returnUrl = ViewData["ReturnUrl"] as string ?? "/";
+    var encodedReturnUrl = System.Net.WebUtility.UrlEncode(returnUrl);
+}
+
+<h2>Login</h2>
+
+<form method="post">
+    <div>
+        <label for="Email">Email</label>
+        <input type="email" id="Email" name="Email" required oninput="this.value = this.value.toLowerCase();" value="@Model.Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div>
+        <label for="Password">Password</label>
+        <input type="password" id="Password" name="Password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <button type="submit">Login</button>
+</form>
+
+<div>
+    <a asp-page="/Entry/ResetPassword" class="btn btn-link">Forgot Password?</a>
+</div>
+
+<h3>Or log in with</h3>
+
+<!-- External login button for Facebook -->
+<a href="/ExternalLogin?provider=Facebook&returnUrl=@encodedReturnUrl">
+    <button type="button">Login with Facebook</button>
+</a>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="text-danger">
+        <p>@ViewData.ModelState.Values.FirstOrDefault()?.Errors.FirstOrDefault()?.ErrorMessage</p>
+    </div>
+}

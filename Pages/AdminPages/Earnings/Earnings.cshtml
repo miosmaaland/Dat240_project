@@ -1,0 +1,20 @@
+@page
+@model SmaHauJenHoaVij.Pages.AdminPages.Earnings.EarningsModel
+@{
+    ViewData["Title"] = "Earnings Overview";
+}
+
+<h2>Earnings Overview</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Service Earnings</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.ServiceEarnings</td>
+        </tr>
+    </tbody>
+</table>

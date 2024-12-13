@@ -1,0 +1,38 @@
+@page
+@model SmaHauJenHoaVij.Pages.CustomerPages.Orders.OrderHistory.IndexModel
+@{
+    ViewData["Title"] = "My Order History";
+}
+
+<h2>My Order History</h2>
+
+@if (Model.Orders.Count == 0)
+{
+    <p>You have not placed any orders yet.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Status</th>
+                <th>Delivery Location</th>
+                <th>Total Price</th>
+                <th>Order Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.Orders)
+            {
+                <tr>
+                    <td>@order.OrderId</td>
+                    <td>@order.Status</td>
+                    <td>@order.Location</td>
+                    <td>@order.TotalPrice</td>
+                    <td>@order.OrderDate.ToString("g")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

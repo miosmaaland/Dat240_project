@@ -1,0 +1,79 @@
+@page
+@model SmaHauJenHoaVij.Pages.CustomerPages.Shopping.CartModel
+
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+
+<h2>Your Shopping Cart</h2>
+
+@if (Model.CartItems.Count == 0)
+{
+    <p>Your cart is empty.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Picture</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Count</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CartItems)
+            {
+                <tr>
+                    <td><img src="@item.PicturePath" alt="@item.Name" style="max-width: 100px;" /></td>
+                    <td>@item.Name</td>
+                    <td>@item.Price</td>
+                    <td>@item.Count</td>
+                    <td>@item.TotalPrice</td>
+                    <td>
+                        <form method="post" asp-page-handler="IncreaseItemCount">
+                            <input type="hidden" name="Sku" value="@item.Sku" />
+                            <button type="submit" class="btn btn-success btn-sm">+</button>
+                        </form>
+                        <form method="post" asp-page-handler="DecreaseItemCount" style="display: inline;">
+                            <input type="hidden" name="Sku" value="@item.Sku" />
+                            <button type="submit" class="btn btn-warning btn-sm">-</button>
+                        </form>
+                        <form method="post" asp-page-handler="RemoveItem" style="display: inline;">
+                            <input type="hidden" name="Sku" value="@item.Sku" />
+                            <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p><strong>Total Items: </strong>@Model.TotalItems</p>
+    <p><strong>Order Price: </strong>@Model.SubTotalPrice</p>
+    <p><strong>Delivery Fee: </strong>@Model.DeliveryFee</p>
+    <p><strong>Total Price (Including Delivery Fee): </strong>@Model.TotalPrice</p>
+
+    <h3>Checkout</h3>
+    <form method="post" asp-page-handler="Checkout">
+        <div class="mb-3">
+            <label for="Building" class="form-label">Building</label>
+            <input type="text" id="Building" name="Building" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="RoomNumber" class="form-label">Room Number</label>
+            <input type="text" id="RoomNumber" name="RoomNumber" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="LocationNotes" class="form-label">Location Notes (Optional)</label>
+            <textarea id="LocationNotes" name="LocationNotes" class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="OrderNotes" class="form-label">Order Notes (Optional)</label>
+            <textarea id="OrderNotes" name="OrderNotes" class="form-control"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Checkout</button>
+    </form>
+}

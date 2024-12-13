@@ -1,0 +1,34 @@
+@page
+@model SmaHauJenHoaVij.Pages.CustomerPages.Payment.IndexModel
+@{
+    ViewData["Title"] = "My Invoices";
+}
+
+<h1>My Invoices</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Invoice ID</th>
+            <th>Order ID</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Date Sent</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var invoice in Model.Invoices)
+        {
+            <tr>
+                <td>@invoice.Id</td>
+                <td>@invoice.OrderId</td>
+                <td>@invoice.Amount</td>
+                <td>@invoice.Status</td>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@invoice.Id" class="btn btn-primary">View Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

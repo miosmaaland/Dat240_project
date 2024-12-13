@@ -1,0 +1,37 @@
+@page
+@model SmaHauJenHoaVij.Pages.CourierPages.Earnings.EarningsModel
+@{
+    ViewData["Title"] = "Earnings Overview";
+}
+
+<h2>Earnings Overview</h2>
+
+<h3>Total Earnings: @Model.Earnings.TotalEarnings:C</h3>
+
+<h3>Monthly Earnings</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Month</th>
+            <th>Earnings</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Earnings.MonthlyEarnings.Count == 0)
+        {
+            <tr>
+                <td colspan="2">No earnings recorded yet.</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var month in Model.Earnings.MonthlyEarnings)
+            {
+                <tr>
+                    <td>@month.Month</td>
+                    <td>@month.Earnings:C</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

@@ -1,0 +1,44 @@
+@page
+@using SmaHauJenHoaVij.Pages.AdminPages
+@model CourierApplicationsModel
+@{
+    ViewData["Title"] = "Courier Applications";
+}
+
+<h2>Courier Applications</h2>
+
+@if (Model.PendingApplications.Count == 0)
+{
+    <p>No pending applications.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model.PendingApplications)
+            {
+                <tr>
+                    <td>@customer.Id</td>
+                    <td>@customer.Name</td>
+                    <td>@customer.Email</td>
+                    <td>
+                        <form method="post" asp-page-handler="Approve" asp-route-id="@customer.Id" style="display: inline;">
+                            <button class="btn btn-success">Approve</button>
+                        </form>
+                        <form method="post" asp-page-handler="Decline" asp-route-id="@customer.Id" style="display: inline;">
+                            <button class="btn btn-danger">Decline</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/miosmaland/Desktop/Dat240/SmaHauJenHoaVij/Pages/Cafeteria",
+      "program": "/Users/miosmaland/Desktop/Dat240/SmaHauJenHoaVij/Pages/Cafeteria/build/Debug/outDebug"
+    }
+  ]
+}
